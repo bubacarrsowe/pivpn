@@ -1622,7 +1622,7 @@ askCustomDomain(){
 }
 
 askPublicIPOrDNS(){
-	if ! IPv4pub=$(dig +short myip.opendns.com @208.67.222.222) || ! validIP "$IPv4pub"; then
+	if ! IPv4pub=$(dig -t aaaa +short myip.opendns.com @resolver1.opendns.com) || ! validIP "$IPv4pub"; then
 		echo "dig failed, now trying to curl checkip.amazonaws.com"
 		if ! IPv4pub=$(curl -sSf https://checkip.amazonaws.com) || ! validIP "$IPv4pub"; then
 			echo "checkip.amazonaws.com failed, please check your internet connection/DNS"
